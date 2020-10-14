@@ -23,7 +23,6 @@ public class BookServlet extends HttpServlet {
                 List<Book> list = bsi.findBookInfoAll();
                 if (list != null) {
                     request.setAttribute("lists",list);
-
                     request.getRequestDispatcher("list.jsp").forward(request,response);
                 }
             } catch (Exception e) {
@@ -33,13 +32,8 @@ public class BookServlet extends HttpServlet {
         if ("le".equals(comm)) {
             String id = request.getParameter("id");
             int ids = Integer.parseInt(id);
-//            String lender = request.getParameter("lender");
             try {
                 Book b = bsi.findByID(ids);
-//                b.setId(ids);
-//                b.setState(1);
-//                b.setLender(lender);
-//                int i = bsi.updateBookInfo(b);
                 if (b != null) {
                     request.setAttribute("b",b);
                     request.getRequestDispatcher("lend.jsp").forward(request,response);
@@ -47,32 +41,27 @@ public class BookServlet extends HttpServlet {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
         if ("lend".equals(comm)) {
             String id = request.getParameter("id");
             int ids = Integer.parseInt(id);
+            System.out.println(ids + " id");
             String lender = request.getParameter("lender");
-            try {
-//                Book b = bsi.findByID(ids);
-                Book b = new Book();
-                b.setId(ids);
-                b.setState(1);
-                b.setLender(lender);
-                int i = bsi.updateBookInfo(b);
-                if (i > 0) {
-//                    request.setAttribute("b",b);
-                    request.getRequestDispatcher("success.jsp").forward(request,response);
-                } else {
-                    request.getRequestDispatcher("failed.jsp").forward(request,response);
+            System.out.println(lender + " lender");
+                try {
+                    Book b = new Book();
+                    b.setId(ids);
+                    b.setState(1);
+                    b.setLender(lender);
+                    System.out.println(lender + "?");
+                        int i = bsi.updateBookInfo(b);
+                        if (i > 0) {
+                            request.getRequestDispatcher("success.jsp").forward(request, response);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
         }
-
-
 
     }
 

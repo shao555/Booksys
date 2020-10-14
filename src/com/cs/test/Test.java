@@ -10,11 +10,11 @@ public class Test {
 
     public static void main(String[] args) throws Exception {
 
-//        findAll();
+        findAll();
 
 //        update();
 
-        findByid();
+//        findByid();
 
     }
 
@@ -39,10 +39,6 @@ public class Test {
             System.out.println("借阅失败");
         }
     }
-
-
-
-
 
     private static void findAll() throws Exception {
         BookServiceImpl bsi = new BookServiceImpl();
